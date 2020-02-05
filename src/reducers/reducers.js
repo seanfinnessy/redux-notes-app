@@ -1,4 +1,4 @@
-import { ADD_NOTE } from '../actions/actions';
+import { ADD_NOTE, REMOVE_NOTE } from '../actions/actions';
 
 const initialState = {
     notes: []
@@ -20,6 +20,13 @@ function rootReducer(state = initialState, action) {
 
             default:
                 return state;
+        
+        case REMOVE_NOTE:
+            return {
+                // returns a new array where the element ids do not match the index. aka the button you click
+                // will return that element's id, so your new array WILL match that index, thus not inclded in new array
+                notes: state.notes.filter((note, index) => index != action.id)
+            };
     };
 }
 

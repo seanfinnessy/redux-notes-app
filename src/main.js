@@ -1,5 +1,5 @@
 import store from './store/store';
-import { addNote } from './actions/actions';
+import { addNote, removeNote } from './actions/actions';
 
 console.log('Before:', store.getState());
 store.dispatch(addNote('One', 'One content'));
@@ -15,9 +15,12 @@ let addNoteTitle = addNoteForm['title'];
 let addNoteContent = addNoteForm['content'];
 
 // ------ Redux ------
+store.subscribe(() => {
+  renderNotes();
+});
+
 function deleteNote(index) {
-  
-  // console.log(index);
+  store.dispatch(removeNote(index));
 }
 
 function renderNotes() {
@@ -41,10 +44,6 @@ function renderNotes() {
 
   setDeleteNoteButtonsEventListeners();
 }
-
-store.subscribe(() => {
-  renderNotes();
-});
 
 // ------ Event Listeners ------
 addNoteForm.addEventListener('submit', (e) => {
