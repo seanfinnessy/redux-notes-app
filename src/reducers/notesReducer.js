@@ -13,11 +13,7 @@ function notesReducer(notes = [], action) {
             ];
         
         case REMOVE_NOTE:
-            return {
-                // returns a new array where the element ids do not match the index. aka the button you click
-                // will return that element's id, so your new array WILL match that index, thus not inclded in new array
-                notes: notes.filter((note, index) => index != action.id)
-            };
+            return notes.filter((note, index) => index != action.id);
         
         default:
             return notes;

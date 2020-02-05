@@ -28,7 +28,7 @@ function renderNotes() {
 
   // sets the <ul> inner html in the index.html to empty
   notesUList.innerHTML = '';
-
+  
   // updates the <ul> inner html
   notes.map((note, index) => {
     let noteItem = `

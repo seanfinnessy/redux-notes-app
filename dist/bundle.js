@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/redux-devtools-extension/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/redux-devtools-extension/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar compose = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\").compose;\n\nexports.__esModule = true;\nexports.composeWithDevTools = (\n  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?\n    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :\n    function() {\n      if (arguments.length === 0) return undefined;\n      if (typeof arguments[0] === 'object') return compose;\n      return compose.apply(null, arguments);\n    }\n);\n\nexports.devToolsEnhancer = (\n  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?\n    window.__REDUX_DEVTOOLS_EXTENSION__ :\n    function() { return function(noop) { return noop; } }\n);\n\n\n//# sourceURL=webpack:///./node_modules/redux-devtools-extension/index.js?");
+
+/***/ }),
+
 /***/ "./node_modules/redux/es/redux.js":
 /*!****************************************!*\
   !*** ./node_modules/redux/es/redux.js ***!
@@ -148,11 +160,11 @@ eval("module.exports = function(originalModule) {\n\tif (!originalModule.webpack
 /*!********************************!*\
   !*** ./src/actions/actions.js ***!
   \********************************/
-/*! exports provided: ADD_NOTE, REMOVE_NOTE, addNote, removeNote */
+/*! exports provided: ADD_NOTE, REMOVE_NOTE, SHOW_ALL, addNote, removeNote, showAll */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ADD_NOTE\", function() { return ADD_NOTE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"REMOVE_NOTE\", function() { return REMOVE_NOTE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addNote\", function() { return addNote; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeNote\", function() { return removeNote; });\nvar ADD_NOTE = \"ADD_NOTE\";\nvar REMOVE_NOTE = 'REMOVE_NOTE'; // Actions define WHAT changed, not HOW\n\nfunction addNote(title, content) {\n  return {\n    type: ADD_NOTE,\n    title: title,\n    content: content\n  };\n}\nfunction removeNote(id) {\n  return {\n    type: REMOVE_NOTE,\n    id: id\n  };\n}\n\n//# sourceURL=webpack:///./src/actions/actions.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ADD_NOTE\", function() { return ADD_NOTE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"REMOVE_NOTE\", function() { return REMOVE_NOTE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SHOW_ALL\", function() { return SHOW_ALL; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addNote\", function() { return addNote; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeNote\", function() { return removeNote; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"showAll\", function() { return showAll; });\nvar ADD_NOTE = \"ADD_NOTE\";\nvar REMOVE_NOTE = 'REMOVE_NOTE';\nvar SHOW_ALL = 'SHOW_ALL'; // Actions define WHAT changed, not HOW\n\nfunction addNote(title, content) {\n  return {\n    type: ADD_NOTE,\n    title: title,\n    content: content\n  };\n}\nfunction removeNote(id) {\n  return {\n    type: REMOVE_NOTE,\n    id: id\n  };\n}\nfunction showAll() {\n  return {\n    type: SHOW_ALL\n  };\n}\n\n//# sourceURL=webpack:///./src/actions/actions.js?");
 
 /***/ }),
 
@@ -168,6 +180,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sto
 
 /***/ }),
 
+/***/ "./src/reducers/notesReducer.js":
+/*!**************************************!*\
+  !*** ./src/reducers/notesReducer.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/actions */ \"./src/actions/actions.js\");\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance\"); }\n\nfunction _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === \"[object Arguments]\") return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }\n\n // reducer to only handle notes\n\nfunction notesReducer() {\n  var notes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n  var action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"ADD_NOTE\"]:\n      return [].concat(_toConsumableArray(notes), [{\n        title: action.title,\n        content: action.content\n      }]);\n\n    case _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"REMOVE_NOTE\"]:\n      return notes.filter(function (note, index) {\n        return index != action.id;\n      });\n\n    default:\n      return notes;\n  }\n\n  ;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (notesReducer);\n\n//# sourceURL=webpack:///./src/reducers/notesReducer.js?");
+
+/***/ }),
+
 /***/ "./src/reducers/reducers.js":
 /*!**********************************!*\
   !*** ./src/reducers/reducers.js ***!
@@ -176,7 +200,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sto
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/actions */ \"./src/actions/actions.js\");\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance\"); }\n\nfunction _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === \"[object Arguments]\") return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }\n\n\nvar initialState = {\n  notes: []\n}; // PARAM: Previous state, and the action being dispatched.\n\nfunction rootReducer() {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;\n  var action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"ADD_NOTE\"]:\n      return {\n        notes: [].concat(_toConsumableArray(state.notes), [{\n          title: action.title,\n          content: action.content\n        }])\n      };\n\n    default:\n      return state;\n\n    case _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"REMOVE_NOTE\"]:\n      return {\n        // returns a new array where the element ids do not match the index. aka the button you click\n        // will return that element's id, so your new array WILL match that index, thus not inclded in new array\n        notes: state.notes.filter(function (note, index) {\n          return index != action.id;\n        })\n      };\n  }\n\n  ;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./src/reducers/reducers.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _notesReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notesReducer */ \"./src/reducers/notesReducer.js\");\n/* harmony import */ var _visibilityReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./visibilityReducer */ \"./src/reducers/visibilityReducer.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\n\n\nvar reducers = Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"combineReducers\"])({\n  notes: _notesReducer__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n  visibility: _visibilityReducer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (reducers);\n\n//# sourceURL=webpack:///./src/reducers/reducers.js?");
+
+/***/ }),
+
+/***/ "./src/reducers/visibilityReducer.js":
+/*!*******************************************!*\
+  !*** ./src/reducers/visibilityReducer.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/actions */ \"./src/actions/actions.js\");\n\n\nfunction visibilityFilter() {\n  var visibility = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"SHOW_ALL\"];\n  var action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"SHOW_ALL\"]:\n      return _actions_actions__WEBPACK_IMPORTED_MODULE_0__[\"SHOW_ALL\"];\n\n    default:\n      return visibility;\n  }\n\n  ;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (visibilityFilter);\n\n//# sourceURL=webpack:///./src/reducers/visibilityReducer.js?");
 
 /***/ }),
 
@@ -188,7 +224,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _act
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _reducers_reducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/reducers */ \"./src/reducers/reducers.js\");\n\n // first arg is the root reducer of the app\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"createStore\"])(_reducers_reducers__WEBPACK_IMPORTED_MODULE_1__[\"default\"]));\n\n//# sourceURL=webpack:///./src/store/store.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _reducers_reducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/reducers */ \"./src/reducers/reducers.js\");\n/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ \"./node_modules/redux-devtools-extension/index.js\");\n/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nvar initialState = {\n  notes: [{\n    title: 'You are cool.',\n    content: 'I mean amazing!'\n  }, {\n    title: 'Ooops.',\n    content: 'I was talking to myself'\n  }],\n  visibility: 'AWESOME_TAG'\n}; // first arg is the root reducer of the app\n\nvar store = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"createStore\"])(_reducers_reducers__WEBPACK_IMPORTED_MODULE_1__[\"default\"], initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());\n/* harmony default export */ __webpack_exports__[\"default\"] = (store);\n\n//# sourceURL=webpack:///./src/store/store.js?");
 
 /***/ })
 
